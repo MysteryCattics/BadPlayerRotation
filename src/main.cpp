@@ -16,10 +16,16 @@ class $modify(NoRotatePlayer, PlayerObject) {
 
         if (m_isShip || m_isBird || m_isDart || m_isSwing) {
             if (m_isDashing) {
-                m_fields->lastDashAngle = -m_dashAngle; // всегда минус
+                m_fields->lastDashAngle = -m_dashAngle; // завжди мінус
                 this->setRotation(m_fields->lastDashAngle);
             } else {
-                this->setRotation(m_fields->lastDashAngle);
+                // якщо wave і був портал трансформації, але не dash — ресет
+                if (m_isDart && m_justChangedGameMode) {
+                    m_fields->lastDashAngle = 0.0f;
+                    this->setRotation(0.0f);
+                } else {
+                    this->setRotation(m_fields->lastDashAngle);
+                }
             }
 
             if (!m_isSwing) {
