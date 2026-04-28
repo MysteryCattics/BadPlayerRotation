@@ -20,8 +20,8 @@ class $modify(NoRotatePlayer, PlayerObject) {
                 this->setRotation(-lastDashAngle);
             }
 
-            // Переворот только для ship/ufo/wave, но НЕ для swing
-            if (!m_isSwing) {
+            // переворот работает каждый кадр
+            if (!m_isSwing) { // исключаем свингкоптер
                 this->setFlipY(m_isUpsideDown);
             }
         } else {
