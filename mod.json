@@ -14,4 +14,12 @@
 	"dependencies": {
 		"geode.node-ids": ">=v1.23.3"
 	}
+	  "settings": {
+    "enabled": {
+      "name": "Enable mod",
+      "description": "Turn rotation fix on/off",
+      "type": "bool",
+      "default": true
+    }
+  }
 }
