@@ -20,10 +20,7 @@ class $modify(NoRotatePlayer, PlayerObject) {
                 this->setRotation(-lastDashAngle);
             }
 
-            // переворот работает каждый кадр
-            if (!m_isSwing) { // исключаем свингкоптер
-                this->setFlipY(m_isUpsideDown);
-            }
+            // переворот НЕ трогаем — оставляем стандартный
         } else {
             PlayerObject::updateRotation(dt);
         }
