@@ -7,7 +7,7 @@ class $modify(NoRotatePlayer, PlayerObject) {
     void updateRotation(float dt) {
         // Игнорируем стандартное вращение
         // Сохраняем только flipX/flipY и углы при dash-orb
-        if (m_isShip || m_isBird || m_isWave || m_isSwing) {
+        if (m_isShip || m_isBird || m_isDart || m_isSwing) {
             // Принудительно сбрасываем rotation
             this->setRotation(0.0f);
 
