@@ -15,9 +15,9 @@ class $modify(NoRotatePlayer, PlayerObject) {
 
             if (m_isDashing) {
                 lastDashAngle = m_dashAngle;
-                this->setRotation(m_dashAngle);
+                this->setRotation(-m_dashAngle);
             } else {
-                this->setRotation(lastDashAngle);
+                this->setRotation(-lastDashAngle);
             }
 
             // Переворот только для ship/ufo/wave, но НЕ для swing
