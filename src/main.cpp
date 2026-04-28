@@ -5,31 +5,30 @@ using namespace geode::prelude;
 
 class $modify(NoRotatePlayer, PlayerObject) {
     void updateRotation(float dt) {
-        // Игнорируем стандартное вращение
-        // Сохраняем только flipX/flipY и углы при dash-orb
-            void PlayerObject::updateRotation(float dt) {
-        // проверяем настройку
         if (!Mod::get()->getSettingValue<bool>("enabled")) {
-            return; // мод выключен
+            PlayerObject::updateRotation(dt);
+            return;
         }
-        if (m_isShip || m_isBird || m_isDart || m_isSwing) {
-            // Принудительно сбрасываем rotation
-            this->setRotation(0.0f);
 
-            // Проверяем dash-orb флаг
+        if (m_isShip || m_isBird || m_isDart || m_isSwing) {
+            // если был dash — сохраняем угол
+            static float lastDashAngle = 0.0f;
+
             if (m_isDashing) {
-                // Поворачиваем к орбу (например, на 90°)
+                lastDashAngle = m_dashAngle;
                 this->setRotation(m_dashAngle);
+            } else {
+                // удерживаем последний угол
+                this->setRotation(lastDashAngle);
             }
 
-            // Переворот при смене направления
+            // переворот — через встроенный флаг
             if (m_isUpsideDown) {
-                this->setScaleY(-fabs(this->getScaleY()));
+                this->setFlipY(true);
             } else {
-                this->setScaleY(fabs(this->getScaleY()));
+                this->setFlipY(false);
             }
         } else {
-            // Для остальных режимов оставляем стандартное поведение
             PlayerObject::updateRotation(dt);
         }
     }
