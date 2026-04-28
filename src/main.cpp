@@ -4,6 +4,8 @@
 using namespace geode::prelude;
 
 class $modify(NoRotatePlayer, PlayerObject) {
+    float lastDashAngle = 0.0f; // поле класса
+
     void updateRotation(float dt) {
         if (!Mod::get()->getSettingValue<bool>("enabled")) {
             PlayerObject::updateRotation(dt);
@@ -11,8 +13,6 @@ class $modify(NoRotatePlayer, PlayerObject) {
         }
 
         if (m_isShip || m_isBird || m_isDart || m_isSwing) {
-            static float lastDashAngle = 0.0f;
-
             if (m_isDashing) {
                 lastDashAngle = m_dashAngle;
                 this->setRotation(-m_dashAngle);
@@ -28,11 +28,10 @@ class $modify(NoRotatePlayer, PlayerObject) {
         }
     }
 
-    // сброс при новой попытке
-    void resetPlayer() {
-        PlayerObject::resetPlayer();
-        // обнуляем угол
-        lastDashAngle = 0.0f;
-        this->setRotation(0.0f);
+    // правильный метод сброса
+    void resetObject() {
+        PlayerObject::resetObject(); // базовый сброс
+        lastDashAngle = 0.0f;        // обнуляем угол
+        this->setRotation(0.0f);     // сброс вращения
     }
 };
