@@ -20,7 +20,8 @@ class $modify(NoRotatePlayer, PlayerObject) {
                 this->setRotation(m_fields->lastDashAngle);
             } else {
                 // якщо wave і був портал трансформації, але не dash — ресет
-                if (m_isDart && m_justChangedGameMode) {
+                double now = m_totalTime;
+                if (m_isDart && m_lastActivatedPortal && (now - m_gameModeChangedTime < 0.1)) {
                     m_fields->lastDashAngle = 0.0f;
                     this->setRotation(0.0f);
                 } else {
@@ -37,8 +38,8 @@ class $modify(NoRotatePlayer, PlayerObject) {
     }
 
     void resetObject() {
-        PlayerObject::resetObject();
-        m_fields->lastDashAngle = 0.0f;
-        this->setRotation(0.0f);
+        PlayerObject::resetObject();   // базовий ресет
+        m_fields->lastDashAngle = 0.0f; // обнуляємо кут
+        this->setRotation(0.0f);        // скидаємо поворот
     }
 };
