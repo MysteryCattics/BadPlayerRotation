@@ -29,8 +29,8 @@ class $modify(NoRotatePlayer, PlayerObject) {
                 }
             }
 
-            if (!m_isSwing) {
-                this->setFlipY(m_isUpsideDown);
+            if (m_isSwing) {
+                this->setFlipY(false);
             }
         } else {
             PlayerObject::updateRotation(dt);
