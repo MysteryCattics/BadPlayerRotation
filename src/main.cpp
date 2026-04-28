@@ -11,22 +11,18 @@ class $modify(NoRotatePlayer, PlayerObject) {
         }
 
         if (m_isShip || m_isBird || m_isDart || m_isSwing) {
-            // если был dash — сохраняем угол
             static float lastDashAngle = 0.0f;
 
             if (m_isDashing) {
                 lastDashAngle = m_dashAngle;
                 this->setRotation(m_dashAngle);
             } else {
-                // удерживаем последний угол
                 this->setRotation(lastDashAngle);
             }
 
-            // переворот — через встроенный флаг
-            if (m_isUpsideDown) {
-                this->setFlipY(true);
-            } else {
-                this->setFlipY(false);
+            // Переворот только для ship/ufo/wave, но НЕ для swing
+            if (!m_isSwing) {
+                this->setFlipY(m_isUpsideDown);
             }
         } else {
             PlayerObject::updateRotation(dt);
