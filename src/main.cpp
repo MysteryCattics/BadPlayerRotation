@@ -4,7 +4,9 @@
 using namespace geode::prelude;
 
 class $modify(NoRotatePlayer, PlayerObject) {
-    float lastDashAngle = 0.0f; // поле класса
+    struct Fields {
+        float lastDashAngle = 0.0f; // все кастомные поля сюда
+    };
 
     void updateRotation(float dt) {
         if (!Mod::get()->getSettingValue<bool>("enabled")) {
@@ -12,12 +14,14 @@ class $modify(NoRotatePlayer, PlayerObject) {
             return;
         }
 
+        auto& f = m_fields; // доступ к твоим полям
+
         if (m_isShip || m_isBird || m_isDart || m_isSwing) {
             if (m_isDashing) {
-                lastDashAngle = m_dashAngle;
-                this->setRotation(-m_dashAngle);
+                f.lastDashAngle = m_dashAngle;
+                this->setRotation(m_dashAngle);
             } else {
-                this->setRotation(-lastDashAngle);
+                this->setRotation(f.lastDashAngle);
             }
 
             if (!m_isSwing) {
@@ -28,10 +32,9 @@ class $modify(NoRotatePlayer, PlayerObject) {
         }
     }
 
-    // правильный метод сброса
     void resetObject() {
-        PlayerObject::resetObject(); // базовый сброс
-        lastDashAngle = 0.0f;        // обнуляем угол
-        this->setRotation(0.0f);     // сброс вращения
+        PlayerObject::resetObject();
+        m_fields->lastDashAngle = 0.0f;
+        this->setRotation(0.0f);
     }
 };
