@@ -20,9 +20,19 @@ class $modify(NoRotatePlayer, PlayerObject) {
                 this->setRotation(-lastDashAngle);
             }
 
-            // переворот НЕ трогаем — оставляем стандартный
+            if (!m_isSwing) {
+                this->setFlipY(m_isUpsideDown);
+            }
         } else {
             PlayerObject::updateRotation(dt);
         }
+    }
+
+    // сброс при новой попытке
+    void resetPlayer() {
+        PlayerObject::resetPlayer();
+        // обнуляем угол
+        lastDashAngle = 0.0f;
+        this->setRotation(0.0f);
     }
 };
