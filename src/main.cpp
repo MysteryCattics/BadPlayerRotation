@@ -5,7 +5,7 @@ using namespace geode::prelude;
 
 class $modify(NoRotatePlayer, PlayerObject) {
     struct Fields {
-        float lastDashAngle = 0.0f; // все кастомные поля сюда
+        float lastDashAngle = 0.0f;
     };
 
     void updateRotation(float dt) {
@@ -14,14 +14,12 @@ class $modify(NoRotatePlayer, PlayerObject) {
             return;
         }
 
-        auto& f = m_fields; // доступ к твоим полям
-
         if (m_isShip || m_isBird || m_isDart || m_isSwing) {
             if (m_isDashing) {
-                f.lastDashAngle = -m_dashAngle;
-                this->setRotation(-m_dashAngle);
+                m_fields->lastDashAngle = -m_dashAngle; // всегда минус
+                this->setRotation(m_fields->lastDashAngle);
             } else {
-                this->setRotation(f.lastDashAngle);
+                this->setRotation(m_fields->lastDashAngle);
             }
 
             if (!m_isSwing) {
