@@ -7,6 +7,11 @@ class $modify(NoRotatePlayer, PlayerObject) {
     void updateRotation(float dt) {
         // Игнорируем стандартное вращение
         // Сохраняем только flipX/flipY и углы при dash-orb
+            void PlayerObject::updateRotation(float dt) {
+        // проверяем настройку
+        if (!Mod::get()->getSettingValue<bool>("enabled")) {
+            return; // мод выключен
+        }
         if (m_isShip || m_isBird || m_isDart || m_isSwing) {
             // Принудительно сбрасываем rotation
             this->setRotation(0.0f);
