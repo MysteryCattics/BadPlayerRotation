@@ -18,8 +18,8 @@ class $modify(NoRotatePlayer, PlayerObject) {
 
         if (m_isShip || m_isBird || m_isDart || m_isSwing) {
             if (m_isDashing) {
-                f.lastDashAngle = m_dashAngle;
-                this->setRotation(m_dashAngle);
+                f.lastDashAngle = -m_dashAngle;
+                this->setRotation(-m_dashAngle);
             } else {
                 this->setRotation(f.lastDashAngle);
             }
