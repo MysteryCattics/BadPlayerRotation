@@ -22,4 +22,8 @@
       "default": true
     }
   }
+    "tags": [
+    "offline",
+    "joke"
+  ]
 }
