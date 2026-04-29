@@ -7,7 +7,7 @@
     "ios": "2.2081"
   },
   "id": "mysterycattics.badplayerrotation",
-  "name": "BadPlayerRotation",
+  "name": "Bad Player Rotation",
   "version": "v1.0.3",
   "developer": "MysteryCattics",
   "description": "bad ship/ufo/wave rotation from 1000+fps",
@@ -16,8 +16,8 @@
   },
   "settings": {
     "enabled": {
-      "name": "Enable mod",
-      "description": "Turn rotation fix on/off",
+      "name": "Buggy rotation",
+      "description": "Toggle 1000+ FPS rotation",
       "type": "bool",
       "default": true
     }
