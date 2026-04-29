@@ -20,7 +20,7 @@ void updateRotation(float dt) {
             this->setRotation(m_fields->lastDashAngle);
         } else {
             // новая логика
-            if (m_lastActivatedPortal < 0.1) {
+            if (m_gameModeChangedTime < 0.1) {
                 m_fields->lastDashAngle = 0.0f;
                 this->setRotation(0.0f);
             } else {
