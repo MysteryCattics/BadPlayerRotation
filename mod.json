@@ -8,7 +8,7 @@
   },
   "id": "mysterycattics.badplayerrotation",
   "name": "Bad Player Rotation",
-  "version": "v1.0.3",
+  "version": "v1.0.4",
   "developer": "MysteryCattics",
   "description": "bad ship/ufo/wave rotation from 1000+fps",
   "dependencies": {
